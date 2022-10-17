@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sistema de vendas</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- estilos -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<!-- script -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+<script type="text/javascript">
+    	$(document).ready(() => {
+	
+           
+
+})
+  function gerarId() {
+    console.log('hehehheheh')
+ }
+    </script>
+<body >
+<nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Prova php
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="logoff.php">Sair</a>
+        </li>
+      </ul>
+    </nav>
+    <form method="post" action="/venda_confirmada">
+    <div class="container mt-5">
+      <div class="row">
+      <div class="col-md-12">
+      <h2>Carrinho:</h2>
+      
+    </div>
+    <?php 
+        $idd = "id";
+        $id = 0 ;
+        $count = 0;?>
+	  <?php foreach($this->view->produtos_completos as $id_produto => $produto) { ?>
+
+      	<?php /*  echo "<pre>";
+                print_r($produto);
+                echo "</pre>";        
+        */
+            ?>
+        
+            
+
+
+        <h6></h6> 
+        <div class="card m-3">
+        <div class="col-md-12">
+            <h4><b><?= $produto['nome'] ?></b></h4>
+            <h6><?= $produto['nome_fornecedor'] ?></h6>
+            <h5>R$:<?= $produto['preco'] ?><h5>
+            <?php 
+                        
+                        $id++;
+                    
+            ?>
+                <input type="hidden" name="preco<?=$id?>" value="<?= $produto['preco'] ?>">
+                
+                <input type="hidden" name="<?= $idd . $id  ?>"  value="<?= $produto['id'] ?>">
+                <?php
+                     
+                ?>
+                
+        </div>
+        </div>
+        
+      
+        
+        
+
+	   <?php } ?>
+       <?php $array_preco_produtos = array(); 
+                $id = 0;?>
+       <?php foreach($this->view->venda as $produtos => $produtos_comp) { ?>
+
+        <?php 
+            array_push($array_preco_produtos, $produtos_comp);   
+        ?>
+        
+        <?php } ?>
+        
+        
+      </div><!--row-->
+      <div>
+        <h2>Valor Total: R$ <?php print_r(array_sum($array_preco_produtos)); ?></h2>
+        <input type="hidden" name="venda_total" value="<?php print_r(array_sum($array_preco_produtos)); ?>">
+    </div>
+    </div>
+    <section class="mt-5">
+    	<div class="container">
+			
+    		<div class="row">
+    			
+
+    		</div>
+			
+    	</div>
+		
+    </section>
+    <hr>
+    <section class="mb-5">
+    	<nav class="navbar navbar-light bg-light mb-4">
+			<div class="container">
+				<div class="navbar-brand mb-0 h1">
+					<h3>Pesquisar Endereço</h3>
+				</div>
+			</div>
+       </nav>
+		<div class="container">
+			<div class="row form-group">
+				<div class="col-sm-3">
+					<input id="cep" type="text" class="form-control" name="cep" value="<?= $_POST['cep'] ?>" placeholder="<?= $_POST['cep'] ?>" readonly/>
+				</div>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="rua" value="<?= $_POST['rua'] ?>" placeholder="<?= $_POST['rua'] ?>" id='rua' readonly />
+				</div>
+			</div>
+
+			<div class="row form-group">
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="bairro" value="<?= $_POST['bairro'] ?>" placeholder="<?= $_POST['bairro'] ?>" id="bairro" readonly />
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="cidade" value="<?= $_POST['cidade'] ?>" placeholder="<?= $_POST['cidade'] ?>" id="cidade" readonly />
+				</div>
+
+				<div class="col-sm-2">
+					<input type="text" class="form-control" name="uf" value="<?= $_POST['uf'] ?>" placeholder="<?= $_POST['uf'] ?>" id='uf' readonly />
+				</div>
+                
+			</div>			
+       </div>
+       <div class="container mb-5 pb-5 pt-3">
+         <div class="row">
+            <div class="col-md-12 d-flex justify-content-center m-auto">
+                <button class="btn btn-large btn-primary">Finalizar venda</button>
+            </div>
+            </form><!--form-->
+       </div>
+    </div>
+    </section>
+    
+
+	
+</body>
+</html>
